@@ -8,9 +8,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import game1.world.World1;
-import game2.world.World2;
-import game3.world.MainMenu3;
-import game3.world.World3;
 import menus.HighScorePlayerMenu;
 import menus.MainMenu;
 import menus.ScoreMenu;
@@ -41,9 +38,6 @@ public class Main extends StateBasedGame{
 		addState(new WelcomeMenu());
 		addState(new MainMenu());
 		addState(new World1());
-		addState(new World2());
-		addState(new World3());
-		addState(new MainMenu3());
 		addState(new ScoreMenu());
 		addState(new HighScorePlayerMenu());
 

@@ -11,8 +11,6 @@ import api.APIListener;
 import api.TGDApi;
 import db.Person;
 import game1.world.World1;
-import game2.world.World2;
-import game3.world.World3;
 
 public class HighScorePlayerMenu extends Menu implements APIListener{
 
@@ -32,8 +30,6 @@ public class HighScorePlayerMenu extends Menu implements APIListener{
 
 		super.removeAllItems();
 		super.addItem("Score "+World1.GAME_NAME +": "+player.getScoreAtGame(1));
-		super.addItem("Score "+World2.GAME_NAME +": "+player.getScoreAtGame(2));
-		super.addItem("Score "+World3.GAME_NAME +": "+player.getScoreAtGame(3));
 
 		super.setEnableClignote(false);
 		super.setCouleurClignote(Color.red);
@@ -75,8 +71,6 @@ public class HighScorePlayerMenu extends Menu implements APIListener{
 
 			super.removeAllItems();
 			super.addItem("Score "+World1.GAME_NAME +": "+player.getScoreAtGame(1));
-			super.addItem("Score "+World2.GAME_NAME +": "+player.getScoreAtGame(2));
-			super.addItem("Score "+World3.GAME_NAME +": "+player.getScoreAtGame(3));
 		}
 	}
 

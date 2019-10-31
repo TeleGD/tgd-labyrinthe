@@ -18,8 +18,6 @@ import api.APIListener;
 import api.TGDApi;
 import db.Person;
 import game1.world.World1;
-import game2.world.World2;
-import game3.world.World3;
 import general.Main;
 import general.ui.Button;
 import general.ui.TGDComponent;
@@ -36,7 +34,7 @@ public class ScoreMenu extends BasicGameState implements EnterActionListener, On
 
 	private static final int WIDTH_SEPARATOR = 5;
 	private static final int HEIGHT_ROW=45;
-	private static final int NB_GAME=3;
+	private static final int NB_GAME=1;
 
 	private static final int BEGIN_Y_TAB=100;
 	private static final int END_Y_TAB=Main.hauteur-150;
@@ -105,8 +103,6 @@ public class ScoreMenu extends BasicGameState implements EnterActionListener, On
 		{
 			String name = null;
 			if(i==0)name=World1.GAME_NAME;
-			else if(i==1)name=World2.GAME_NAME;
-			else if(i==2)name=World3.GAME_NAME;
 			g.setColor(new Color(255,0,0));
 			g.drawString(name,PADDING_LEFT+ i*LARGEUR_COLUMN+PADDING_LEFT_COLUMN+LARGEUR_COLUMN/2-g.getFont().getWidth(name), BEGIN_Y_TAB);
 
