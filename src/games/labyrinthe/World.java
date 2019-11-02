@@ -1,7 +1,6 @@
-package game1.world;
+package games.labyrinthe;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -11,15 +10,15 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import game1.characters.GridlockedPlayer;
+import games.labyrinthe.characters.GridlockedPlayer;
 import menus.MainMenu;
 
-public class World1 extends BasicGameState{
+public class World extends BasicGameState{
 
 	public static int ID=1;
 
 	public final static String GAME_NAME="Labyrinthe";
-	public final static String GAME_FOLDER_NAME="Labyrinth";
+	public final static String GAME_FOLDER_NAME="labyrinthe";
 	public final static String DIRECTORY_SOUNDS="sounds"+File.separator+GAME_FOLDER_NAME+File.separator;
 	public final static String DIRECTORY_MUSICS="musics"+File.separator+GAME_FOLDER_NAME+File.separator;
 	public final static String DIRECTORY_IMAGES="images"+File.separator+GAME_FOLDER_NAME+File.separator;
@@ -27,7 +26,6 @@ public class World1 extends BasicGameState{
 	private static Labyrinth labyrinth;
 	private static MazeGenerator mazeGenerator;
 	private static GridlockedPlayer player;
-	private ArrayList<Cell> cellTest;
 	private static int score;
 	private static StateBasedGame game;
 
@@ -56,7 +54,7 @@ public class World1 extends BasicGameState{
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
 		player.update(arg0, arg1, arg2);
-		this.labyrinth.update(arg0, arg1, arg2);
+		World.labyrinth.update(arg0, arg1, arg2);
 	}
 
 	@Override
@@ -80,13 +78,15 @@ public class World1 extends BasicGameState{
 		return labyrinth;
 	}
 
+	@Override
 	public void keyPressed(int key, char c) {
 		player.keyPressed(key, c);
-		if(key==Input.KEY_F1){
+		if(key==Input.KEY_ESCAPE){
 			game.enterState(MainMenu.ID);
 		}
 	}
 
+	@Override
 	public void keyReleased(int key, char c) {
 		player.keyReleased(key, c);
 	}
@@ -100,7 +100,7 @@ public class World1 extends BasicGameState{
 	}
 
 	public static void setScore(int score) {
-		World1.score = score;
+		World.score = score;
 	}
 
 

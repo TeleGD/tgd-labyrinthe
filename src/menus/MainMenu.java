@@ -4,7 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import game1.world.World1;
+import games.labyrinthe.World;
 
 public class MainMenu extends Menu{
 
@@ -13,7 +13,7 @@ public class MainMenu extends Menu{
 	public MainMenu(){
 		super.setTitrePrincipal("MULTIGAME DESIGN");
 		super.setTitreSecondaire("Menu Principal");
-		super.setItems(World1.GAME_NAME,"Scores", "Quitter");
+		super.setItems(World.GAME_NAME,"Scores", "Quitter");
 
 		super.setEnableClignote(false);
 		super.setCouleurClignote(Color.red);
@@ -29,8 +29,8 @@ public class MainMenu extends Menu{
 	public void onOptionItemSelected(int position) {
 		switch (position) {
 		case 0:
-			World1.reset();
-			game.enterState(World1.ID, new FadeOutTransition(),
+			World.reset();
+			game.enterState(World.ID, new FadeOutTransition(),
 					new FadeInTransition());
 			break;
 		case 1:

@@ -1,4 +1,4 @@
-package game1.characters;
+package games.labyrinthe.characters;
 
 import java.io.File;
 
@@ -10,8 +10,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import game1.world.Cell;
-import game1.world.World1;
+import games.labyrinthe.Cell;
+import games.labyrinthe.World;
 
 public class GridlockedPlayer {
 	private double x,y;
@@ -34,14 +34,14 @@ public class GridlockedPlayer {
 		this.getCell();
 		moving =0;
 		try{
-		right1=new Image(World1.DIRECTORY_IMAGES+"Player"+File.separator+"droite1.png").getScaledCopy(39,50);
-		right2=new Image(World1.DIRECTORY_IMAGES+"Player"+File.separator+"droite2.png").getScaledCopy(39,50);
-		left1=new Image(World1.DIRECTORY_IMAGES+"Player"+File.separator+"gauche1.png").getScaledCopy(39,50);
-		left2=new Image(World1.DIRECTORY_IMAGES+"Player"+File.separator+"gauche2.png").getScaledCopy(39,50);
-		up1=new Image(World1.DIRECTORY_IMAGES+"Player"+File.separator+"haut1.png").getScaledCopy(39,50);
-		up2=new Image(World1.DIRECTORY_IMAGES+"Player"+File.separator+"haut2.png").getScaledCopy(39,50);
-		down1=new Image(World1.DIRECTORY_IMAGES+"Player"+File.separator+"bas1.png").getScaledCopy(39,50);
-		down2=new Image(World1.DIRECTORY_IMAGES+"Player"+File.separator+"bas2.png");
+		right1=new Image(World.DIRECTORY_IMAGES+"Player"+File.separator+"droite1.png").getScaledCopy(39,50);
+		right2=new Image(World.DIRECTORY_IMAGES+"Player"+File.separator+"droite2.png").getScaledCopy(39,50);
+		left1=new Image(World.DIRECTORY_IMAGES+"Player"+File.separator+"gauche1.png").getScaledCopy(39,50);
+		left2=new Image(World.DIRECTORY_IMAGES+"Player"+File.separator+"gauche2.png").getScaledCopy(39,50);
+		up1=new Image(World.DIRECTORY_IMAGES+"Player"+File.separator+"haut1.png").getScaledCopy(39,50);
+		up2=new Image(World.DIRECTORY_IMAGES+"Player"+File.separator+"haut2.png").getScaledCopy(39,50);
+		down1=new Image(World.DIRECTORY_IMAGES+"Player"+File.separator+"bas1.png").getScaledCopy(39,50);
+		down2=new Image(World.DIRECTORY_IMAGES+"Player"+File.separator+"bas2.png");
 		img=right1;
 		} catch( Exception e){
 			System.out.println("image du player-labyrinth non chargée");
@@ -109,9 +109,6 @@ public class GridlockedPlayer {
 			right=true;
 			rightLeft=true;
 			break;
-		case Input.KEY_ESCAPE:
-			System.exit(0);
-			break;
 		}
 
 	}
@@ -143,7 +140,7 @@ public class GridlockedPlayer {
 			}
 		}
 		if(((down && !up) || (up && down && updown))){
-			if(!this.cell.isSouthWall() && y < game1.world.World1.getLabyrinth().getLines()*cellSize - cellSize) {
+			if(!this.cell.isSouthWall() && y < games.labyrinthe.World.getLabyrinth().getLines()*cellSize - cellSize) {
 				moving=2;
 				y = y + cellSize/2;
 				img=down1;
@@ -159,7 +156,7 @@ public class GridlockedPlayer {
 		}
 		if(((!left && right)|| (left && right && rightLeft)))
 		{
-			if(!this.cell.isEastWall() && x < game1.world.World1.getLabyrinth().getRows()*cellSize - cellSize ){
+			if(!this.cell.isEastWall() && x < games.labyrinthe.World.getLabyrinth().getRows()*cellSize - cellSize ){
 				moving=1;
 				x = x + cellSize/2;
 				img=right1;
@@ -170,7 +167,7 @@ public class GridlockedPlayer {
 	public void getCell(){
 		int j=(int) Math.floor((x-10)/cellSize);
 		int i=(int) Math.floor((y-10)/cellSize);
-		this.cell=game1.world.World1.getLabyrinth().getCell(i,j);
+		this.cell=games.labyrinthe.World.getLabyrinth().getCell(i,j);
 	}
 
 	public int getI()

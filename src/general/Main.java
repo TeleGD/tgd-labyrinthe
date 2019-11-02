@@ -1,13 +1,11 @@
 package general;
 
-import java.io.File;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import game1.world.World1;
+import games.labyrinthe.World;
 import menus.HighScorePlayerMenu;
 import menus.MainMenu;
 import menus.ScoreMenu;
@@ -37,7 +35,7 @@ public class Main extends StateBasedGame{
 	public void initStatesList(GameContainer container) throws SlickException {
 		addState(new WelcomeMenu());
 		addState(new MainMenu());
-		addState(new World1());
+		addState(new World());
 		addState(new ScoreMenu());
 		addState(new HighScorePlayerMenu());
 

@@ -1,4 +1,4 @@
-package game1.world;
+package games.labyrinthe;
 
 import java.util.Stack;
 

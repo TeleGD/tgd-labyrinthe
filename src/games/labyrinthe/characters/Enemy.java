@@ -1,4 +1,4 @@
-package game1.characters;
+package games.labyrinthe.characters;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -6,7 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import game1.world.Cell;
+import games.labyrinthe.Cell;
 
 public class Enemy {
 
@@ -31,7 +31,7 @@ public class Enemy {
 
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
 		arg2.setColor(Color.cyan);
-		arg2.fillRect((float)x,(float) y, (float)50, (float)50);
+		arg2.fillRect((float)x,(float) y, 50, 50);
 		arg2.drawString("nextX="+nextX, 1100, 20);
 		arg2.drawString("nextY="+nextY, 1100, 40);
 		arg2.drawString("lastCell="+lastCell, 1100, 60);
@@ -195,6 +195,6 @@ public class Enemy {
 	public void getCell(){
 		int i=(int) Math.floor(x/cellSize);
 		int j=(int) Math.floor(y/cellSize);
-		this.cell=game1.world.World1.getLabyrinth().getCell(i,j);
+		this.cell=games.labyrinthe.World.getLabyrinth().getCell(i,j);
 	}
 }

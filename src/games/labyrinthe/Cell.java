@@ -1,4 +1,4 @@
-package game1.world;
+package games.labyrinthe;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -28,7 +28,7 @@ public class Cell{
 		this.itsATrap=false;
 		//TODO LIGNE A CORRIGER PLUS TARD
 		try {
-			this.sprite = new Image("images/Labyrinth/noWalls.png");
+			this.sprite = new Image("images/labyrinthe/noWalls.png");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,7 +55,7 @@ public class Cell{
 
 	public void autoSetSprite() throws SlickException {
 	// Automatically selects the right sprite
-		String path_prefix = "images/Labyrinth/";
+		String path_prefix = "images/labyrinthe/";
 
 		if(itsATrap) path_prefix+="Trapped/";
 		else if(giveScore) path_prefix+="Points/";
@@ -159,14 +159,14 @@ public class Cell{
 
 
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
-		if (World1.getPlayer().getI()==this.getI() && World1.getPlayer().getJ()==this.getJ()){
+		if (World.getPlayer().getI()==this.getI() && World.getPlayer().getJ()==this.getJ()){
 			if (giveScore){
 				giveScore=false;
 				autoSetSprite();
-				World1.setScore(World1.getScore()+1);
+				World.setScore(World.getScore()+1);
 			}
 			if (isFinalCell){
-				World1.reset();
+				World.reset();
 				//System.out.println("fin");
 			}
 			if (itsATrap){
