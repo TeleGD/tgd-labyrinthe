@@ -4,42 +4,46 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import games.labyrinthe.Cell;
+import games.labyrinthe.World;
 
 public class Player {
+
+	private World world;
 	private double x,y;
 	private boolean up,down,right,left,updown,rightLeft;
 	private int cellSize=64;
 	private Cell cell;
 	private double speedX,speedY;
 
-	public Player(){
+	public Player(World world) {
+		this.world = world;
 		x = 100;
 		y = 100;
 		this.getCell();
 	}
 
-	public Player(int i, int j){
+	public Player(World world, int i, int j) {
+		this.world = world;
 		x = i*cellSize + 32 - 250;
 		y = j*cellSize + 32 - 25;
 		this.getCell();
 	}
 
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
-		arg2.setColor(Color.blue);
-		arg2.fillRect((float)x,(float) y, 50, 50);
-		arg2.drawString("bonjour", 1100, 500);
+	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		context.setColor(Color.blue);
+		context.fillRect((float)x,(float) y, 50, 50);
+		context.drawString("bonjour", 1100, 500);
 
 	}
 
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
+	public void update(GameContainer container, StateBasedGame game, int delta) {
 		this.getCell();
 		move();
-		x+=speedX*arg2;
-		y+=speedY*arg2;
+		x+=speedX*delta;
+		y+=speedY*delta;
 	}
 
 
@@ -114,6 +118,6 @@ public class Player {
 	public void getCell(){
 		int i=(int) Math.floor(x/cellSize);
 		int j=(int) Math.floor(y/cellSize);
-		this.cell=games.labyrinthe.World.getLabyrinth().getCell(i,j);
+		this.cell=world.getLabyrinth().getCell(i,j);
 	}
 }

@@ -2,8 +2,6 @@ package games.labyrinthe;
 
 import java.util.Stack;
 
-import org.newdawn.slick.SlickException;
-
 public class MazeGenerator
 {
 	private Labyrinth labyrinth;
@@ -71,8 +69,7 @@ public class MazeGenerator
 	}
 
 
-	public void mazeGenrator() throws SlickException
-	{
+	public void mazeGenrator() {
 		//Make the initial cell the current cell and mark it as visited
 		stack = new Stack<Cell>();
 		currentCell = labyrinth.getCell(0, 0);

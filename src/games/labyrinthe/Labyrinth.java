@@ -2,10 +2,7 @@ package games.labyrinthe;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-
-import games.labyrinthe.Cell;
 
 public class Labyrinth {
 
@@ -14,8 +11,7 @@ public class Labyrinth {
 	private boolean haveExit;
 
 
-	public Labyrinth (int lines,int rows)
-	{
+	public Labyrinth(World world, int lines,int rows) {
 		int rand;
 		this.lines = lines;
 		this.rows = rows;
@@ -25,7 +21,7 @@ public class Labyrinth {
 		{
 			for (int j=0;j<rows;j++)
 			{
-				cell = new Cell(i,j);
+				cell = new Cell(world, i,j);
 				cells[i][j]=cell;
 				rand =(int) (Math.random()*10);
 				if(rand < 3) cells[i][j].setGiveScore(true);
@@ -50,29 +46,27 @@ public class Labyrinth {
 	}
 
 
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException
-	{
+	public void update(GameContainer container, StateBasedGame game, int delta) {
 		for (Cell[] cells2 : cells)
 		{
 			for(Cell cell : cells2)
 			{
-				cell.update(arg0, arg1, arg2);
+				cell.update(container, game, delta);
 			}
 		}
 	}
 
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
+	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		for (Cell[] cells2 : cells)
 		{
 			for(Cell cell : cells2)
 			{
-				cell.render(arg0, arg1, arg2);
+				cell.render(container, game, context);
 			}
 		}
 	}
 
-	public void autoset() throws SlickException
-	{
+	public void autoset() {
 		for (int i = 0 ; i<this.getLines() ; i++)
 		{
 			for (int j = 0 ; j<this.getRows() ; j++)

@@ -3,13 +3,14 @@ package games.labyrinthe.characters;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import games.labyrinthe.Cell;
+import games.labyrinthe.Labyrinth;
 
 public class Enemy {
 
+	private Labyrinth labyrinth;
 	private double x,y,nextX,nextY;
 	private boolean moving;
 	private int cellSize=64;
@@ -17,8 +18,8 @@ public class Enemy {
 	private int lastCell;
 	private double speedX,speedY;
 
-
-	public Enemy	(int i, int j){
+	public Enemy(Labyrinth labyrinth, int i, int j) {
+		this.labyrinth = labyrinth;
 		x = i*cellSize + 32 - 25;
 		y = j*cellSize + 32 - 25;
 		nextX=x;
@@ -29,16 +30,16 @@ public class Enemy {
 		speedY=0;
 	}
 
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
-		arg2.setColor(Color.cyan);
-		arg2.fillRect((float)x,(float) y, 50, 50);
-		arg2.drawString("nextX="+nextX, 1100, 20);
-		arg2.drawString("nextY="+nextY, 1100, 40);
-		arg2.drawString("lastCell="+lastCell, 1100, 60);
+	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		context.setColor(Color.cyan);
+		context.fillRect((float)x,(float) y, 50, 50);
+		context.drawString("nextX="+nextX, 1100, 20);
+		context.drawString("nextY="+nextY, 1100, 40);
+		context.drawString("lastCell="+lastCell, 1100, 60);
 
 	}
 
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
+	public void update(GameContainer container, StateBasedGame game, int delta) {
 		this.getCell();
 		if(this.nextX==x && this.nextY==y){
 			moving=false;
@@ -54,8 +55,8 @@ public class Enemy {
 		if(this.y>this.nextY-5 && this.y<this.nextY+5)
 			y=this.nextY;
 
-		x+=speedX*arg2;
-		y+=speedY*arg2;
+		x+=speedX*delta;
+		y+=speedY*delta;
 	}
 
 
@@ -195,6 +196,6 @@ public class Enemy {
 	public void getCell(){
 		int i=(int) Math.floor(x/cellSize);
 		int j=(int) Math.floor(y/cellSize);
-		this.cell=games.labyrinthe.World.getLabyrinth().getCell(i,j);
+		this.cell=labyrinth.getCell(i,j);
 	}
 }

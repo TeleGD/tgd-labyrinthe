@@ -3,11 +3,15 @@ package games.labyrinthe;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import app.AppLoader;
 
 public class Cell{
 
+	private World world;
 	private boolean northWall,southWall,westWall,eastWall;
 	private int i,j;
 	private boolean itsATrap;
@@ -15,8 +19,8 @@ public class Cell{
 	private boolean giveScore;
 	private Image sprite;
 
-	public Cell (int i, int j)
-	{
+	public Cell(World world, int i, int j) {
+		this.world = world;
 		this.i = i;
 		this.j = j;
 		this.setNorthWall(true);
@@ -27,12 +31,7 @@ public class Cell{
 		this.isFinalCell=false;
 		this.itsATrap=false;
 		//TODO LIGNE A CORRIGER PLUS TARD
-		try {
-			this.sprite = new Image("images/labyrinthe/noWalls.png");
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.sprite = AppLoader.loadPicture("/images/labyrinthe/noWalls.png");
 	}
 
 	public Cell (int i, int j, boolean east, boolean north, boolean south, boolean west){
@@ -45,17 +44,12 @@ public class Cell{
 		this.giveScore=false;
 		this.isFinalCell=false;
 		this.itsATrap=false;
-		try {
-			autoSetSprite();
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		autoSetSprite();
 	}
 
-	public void autoSetSprite() throws SlickException {
+	public void autoSetSprite() {
 	// Automatically selects the right sprite
-		String path_prefix = "images/labyrinthe/";
+		String path_prefix = "/images/labyrinthe/";
 
 		if(itsATrap) path_prefix+="Trapped/";
 		else if(giveScore) path_prefix+="Points/";
@@ -63,40 +57,40 @@ public class Cell{
 
 		if(eastWall){
 			if(northWall){
-				if(westWall) sprite = new Image(path_prefix+"deadEnd_up.png");
-				else if(southWall) sprite = new Image(path_prefix+"deadEnd_right.png");
-				else sprite = new Image(path_prefix+"corner_left-down.png");
+				if(westWall) sprite = AppLoader.loadPicture(path_prefix+"deadEnd_up.png");
+				else if(southWall) sprite = AppLoader.loadPicture(path_prefix+"deadEnd_right.png");
+				else sprite = AppLoader.loadPicture(path_prefix+"corner_left-down.png");
 			}
 			else{
 				if(westWall){
-					if(southWall) sprite = new Image(path_prefix+"deadEnd_down.png");
-					else sprite = new Image(path_prefix+"vertical.png");
+					if(southWall) sprite = AppLoader.loadPicture(path_prefix+"deadEnd_down.png");
+					else sprite = AppLoader.loadPicture(path_prefix+"vertical.png");
 				}
 				else{
-					if(southWall) sprite = new Image(path_prefix+"corner_left-up.png");
-					else sprite = new Image(path_prefix+"tJunction_right.png");
+					if(southWall) sprite = AppLoader.loadPicture(path_prefix+"corner_left-up.png");
+					else sprite = AppLoader.loadPicture(path_prefix+"tJunction_right.png");
 				}
 			}
 		}
 		else{
 			if(northWall){
 				if(westWall){
-					if(southWall) sprite = new Image(path_prefix+"deadEnd_left.png");
-					else sprite = new Image(path_prefix+"corner_right-down.png");
+					if(southWall) sprite = AppLoader.loadPicture(path_prefix+"deadEnd_left.png");
+					else sprite = AppLoader.loadPicture(path_prefix+"corner_right-down.png");
 				}
 				else{
-					if(southWall) sprite = new Image(path_prefix+"horizontal.png");
-					else sprite = new Image(path_prefix+"tJunction_up.png");
+					if(southWall) sprite = AppLoader.loadPicture(path_prefix+"horizontal.png");
+					else sprite = AppLoader.loadPicture(path_prefix+"tJunction_up.png");
 				}
 			}
 			else{
 				if(westWall){
-					if(southWall) sprite = new Image(path_prefix+"corner_right-up.png");
-					else sprite = new Image(path_prefix+"tJunction_left.png");
+					if(southWall) sprite = AppLoader.loadPicture(path_prefix+"corner_right-up.png");
+					else sprite = AppLoader.loadPicture(path_prefix+"tJunction_left.png");
 				}
 				else{
-					if(southWall) sprite = new Image(path_prefix+"tJunction_down.png");
-					else sprite = new Image(path_prefix+"noWalls.png");
+					if(southWall) sprite = AppLoader.loadPicture(path_prefix+"tJunction_down.png");
+					else sprite = AppLoader.loadPicture(path_prefix+"noWalls.png");
 				}
 			}
 		}
@@ -152,25 +146,26 @@ public class Cell{
 	}
 
 
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException
-	{
-		arg2.drawImage(sprite,j*64,i*64);
+	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		context.drawImage(sprite,j*64,i*64);
 	}
 
 
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
-		if (World.getPlayer().getI()==this.getI() && World.getPlayer().getJ()==this.getJ()){
+	public void update(GameContainer container, StateBasedGame game, int delta) {
+		if (world.getPlayer().getI()==this.getI() && world.getPlayer().getJ()==this.getJ()){
 			if (giveScore){
 				giveScore=false;
 				autoSetSprite();
-				World.setScore(World.getScore()+1);
+				world.setScore(world.getScore()+1);
 			}
 			if (isFinalCell){
-				World.reset();
+				world.setState(3);
+				game.enterState(world.getID(), new FadeOutTransition(), new FadeInTransition());
 				//System.out.println("fin");
 			}
 			if (itsATrap){
-				System.exit(0);
+				world.setState(3);
+				game.enterState(1 /* Choice */, new FadeOutTransition(), new FadeInTransition());
 			}
 		}
 	}
