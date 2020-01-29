@@ -34,7 +34,7 @@ public class Cell{
 		this.sprite = AppLoader.loadPicture("/images/labyrinthe/noWalls.png");
 	}
 
-	public Cell (int i, int j, boolean east, boolean north, boolean south, boolean west){
+	public Cell(int i, int j, boolean east, boolean north, boolean south, boolean west) {
 		this.i = i;
 		this.j = j;
 		this.setNorthWall(north);
@@ -94,46 +94,37 @@ public class Cell{
 				}
 			}
 		}
-
 	}
 
-	public boolean isWestWall()
-	{
+	public boolean isWestWall() {
 		return westWall;
 	}
 
-	public void setWestWall(boolean westWall)
-	{
+	public void setWestWall(boolean westWall) {
 		this.westWall = westWall;
 	}
 
-	public boolean isNorthWall()
-	{
+	public boolean isNorthWall() {
 		return northWall;
 	}
 
-	public void setNorthWall(boolean northWall)
-	{
+	public void setNorthWall(boolean northWall) {
 		this.northWall = northWall;
 	}
 
-	public boolean isSouthWall()
-	{
+	public boolean isSouthWall() {
 		return southWall;
 	}
 
-	public void setSouthWall(boolean southWall)
-	{
+	public void setSouthWall(boolean southWall) {
 		this.southWall = southWall;
 	}
 
-	public boolean isEastWall()
-	{
+	public boolean isEastWall() {
 		return eastWall;
 	}
 
-	public void setEastWall(boolean eastWall)
-	{
+	public void setEastWall(boolean eastWall) {
 		this.eastWall = eastWall;
 	}
 
@@ -145,11 +136,9 @@ public class Cell{
 		this.itsATrap = itsATrap;
 	}
 
-
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		context.drawImage(sprite,j*64,i*64);
 	}
-
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
 		if (world.getPlayer().getI()==this.getI() && world.getPlayer().getJ()==this.getJ()){
@@ -160,7 +149,7 @@ public class Cell{
 			}
 			if (isFinalCell){
 				world.setState(3);
-				game.enterState(world.getID(), new FadeOutTransition(), new FadeInTransition());
+				game.enterState(world.getID());
 				//System.out.println("fin");
 			}
 			if (itsATrap){
@@ -169,7 +158,6 @@ public class Cell{
 			}
 		}
 	}
-
 
 	public int getI() {
 		return i;
@@ -210,6 +198,5 @@ public class Cell{
 	public void setGiveScore(boolean giveScore) {
 		this.giveScore = giveScore;
 	}
-
 
 }

@@ -28,11 +28,6 @@ public class Choice extends AppMenu {
 					game.enterState(3, new FadeOutTransition(), new FadeInTransition());
 				}
 			},
-			new MenuItem("Scores") {
-				public void itemSelected() {
-					game.enterState(4, new FadeOutTransition(), new FadeInTransition());
-				}
-			},
 			new MenuItem("Retour") {
 				public void itemSelected() {
 					game.enterState(0, new FadeOutTransition(), new FadeInTransition());

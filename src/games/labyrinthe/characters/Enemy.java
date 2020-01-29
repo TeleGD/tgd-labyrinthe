@@ -36,7 +36,6 @@ public class Enemy {
 		context.drawString("nextX="+nextX, 1100, 20);
 		context.drawString("nextY="+nextY, 1100, 40);
 		context.drawString("lastCell="+lastCell, 1100, 60);
-
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
@@ -59,9 +58,7 @@ public class Enemy {
 		y+=speedY*delta;
 	}
 
-
-
-	private void move(){//1: bas, 2:gauche, 3:haut, 4:droite
+	private void move() { // 1: bas, 2:gauche, 3:haut, 4:droite
 		switch (lastCell){
 		case 1:
 			if(!cell.isEastWall() && !cell.isNorthWall() && !cell.isWestWall()){
@@ -151,15 +148,10 @@ public class Enemy {
 			else if(!cell.isNorthWall()){moveUp();return;}
 			else if(!cell.isWestWall()){moveLeft();return;}
 			else{moveRight();return;}
-
-
 		}
 	}
 
-
-
-
-	private void moveUp(){
+	private void moveUp() {
 		moving=true;
 		this.nextY=this.y-64;
 		this.nextX=this.x;
@@ -167,7 +159,8 @@ public class Enemy {
 		speedX=0;
 		lastCell=1;
 	}
-	private void moveRight(){
+
+	private void moveRight() {
 		moving=true;
 		this.nextY=this.y;
 		this.nextX=this.x+64;
@@ -175,7 +168,8 @@ public class Enemy {
 		speedX=0.1;
 		lastCell=2;
 	}
-	private void moveLeft(){
+
+	private void moveLeft() {
 		moving=true;
 		this.nextY=this.y;
 		this.nextX=this.x-64;
@@ -183,7 +177,8 @@ public class Enemy {
 		speedX=-0.1;
 		lastCell=4;
 	}
-	private void moveDown(){
+
+	private void moveDown() {
 		moving=true;
 		this.nextY=this.y+64;
 		this.nextX=this.x;
@@ -192,10 +187,10 @@ public class Enemy {
 		lastCell=3;
 	}
 
-
-	public void getCell(){
+	public void getCell() {
 		int i=(int) Math.floor(x/cellSize);
 		int j=(int) Math.floor(y/cellSize);
 		this.cell=labyrinth.getCell(i,j);
 	}
+
 }

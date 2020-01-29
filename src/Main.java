@@ -53,8 +53,6 @@ public final class Main {
 				this.addState(new pages.Choice(1));
 				this.addState(new pages.Pause(2));
 				this.addState(new games.labyrinthe.World(3));
-				this.addState(new menus.ScoreMenu(4));
-				this.addState(new menus.HighScorePlayerMenu(5));
 			}
 
 		};

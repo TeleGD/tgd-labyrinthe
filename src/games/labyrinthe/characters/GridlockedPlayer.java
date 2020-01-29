@@ -51,14 +51,12 @@ public class GridlockedPlayer {
 		} catch( Exception e){
 			System.out.println("image du player-labyrinth non chargée");
 		}
-
 	}
 
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		context.setColor(Color.magenta);
 		//context.fillRect((float)x,(float) y, (float)50, (float)50);
 		context.drawImage(img, (float)x+5, (float)y);
-
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
@@ -92,10 +90,8 @@ public class GridlockedPlayer {
 		}
 	}
 
-
 	public void keyPressed(int key, char c) {
 		switch (key){
-
 		case Input.KEY_UP:
 			up=true;
 			updown=false;
@@ -115,7 +111,6 @@ public class GridlockedPlayer {
 			rightLeft=true;
 			break;
 		}
-
 	}
 
 	public void keyReleased(int key, char c) {
@@ -169,19 +164,18 @@ public class GridlockedPlayer {
 		}
 	}
 
-	public void getCell(){
+	public void getCell() {
 		int j=(int) Math.floor((x-10)/cellSize);
 		int i=(int) Math.floor((y-10)/cellSize);
 		this.cell=world.getLabyrinth().getCell(i,j);
 	}
 
-	public int getI()
-	{
+	public int getI() {
 		return this.cell.getI();
 	}
 
-	public int getJ()
-	{
+	public int getJ() {
 		return this.cell.getJ();
 	}
+
 }

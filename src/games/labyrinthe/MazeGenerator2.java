@@ -2,8 +2,7 @@ package games.labyrinthe;
 
 import java.util.Stack;
 
-public class MazeGenerator2
-{
+public class MazeGenerator2 {
 
 	private Labyrinth labyrinth;
 	private Cell[][] unvisitedCell;
@@ -11,9 +10,7 @@ public class MazeGenerator2
 	private Cell currentCell;
 	private Cell chosenCell;
 
-
-	public MazeGenerator2(Labyrinth labyrinth)
-	{
+	public MazeGenerator2(Labyrinth labyrinth) {
 		stack = new Stack<Cell>();
 		this.labyrinth = labyrinth;
 		this.unvisitedCell = new Cell[this.labyrinth.getLines()][this.labyrinth.getRows()];
@@ -26,8 +23,7 @@ public class MazeGenerator2
 		}
 	}
 
-	public void destroyWall()
-	{
+	public void destroyWall() {
 		int random = (int)Math.random()*4;
 		//Choose randomly one of the unvisited neighbours and Remove the wall between the current cell and the chosen cell
 		switch(random)
@@ -63,8 +59,7 @@ public class MazeGenerator2
 		}
 	}
 
-	public boolean stillUnvisitedCell()
-	{
+	public boolean stillUnvisitedCell() {
 		for (int i=0 ; i<labyrinth.getLines();i++ )
 		{
 			for (int j = 0 ; j<labyrinth.getRows();j++)
@@ -78,10 +73,7 @@ public class MazeGenerator2
 		return false;
 	}
 
-
-
-	public boolean hasAnUnvisitedNeighbor(int i , int j)
-	{
+	public boolean hasAnUnvisitedNeighbor(int i , int j) {
 		boolean result = false;
 		if (i-1 >= 0 && this.unvisitedCell[i-1][j]!=null)
 			result =  result||(this.unvisitedCell[i-1][j]!=null);

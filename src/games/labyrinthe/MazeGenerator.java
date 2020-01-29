@@ -2,16 +2,15 @@ package games.labyrinthe;
 
 import java.util.Stack;
 
-public class MazeGenerator
-{
+public class MazeGenerator {
+
 	private Labyrinth labyrinth;
 	private Cell[][] unvisitedCell;
 	private Cell currentCell;
 	private Cell choosenCell;
 	private Stack<Cell> stack;
 
-	public MazeGenerator (Labyrinth labyrinth)
-	{
+	public MazeGenerator (Labyrinth labyrinth) {
 		this.labyrinth = labyrinth;
 		this.unvisitedCell = new Cell[labyrinth.getLines()][labyrinth.getRows()];
 		for (int i = 0 ; i < labyrinth.getLines();i++)
@@ -23,8 +22,7 @@ public class MazeGenerator
 		}
 	}
 
-	public int getChosenCell(int i,int j)
-	{
+	public int getChosenCell(int i,int j) {
 		int random = (int)Math.floor(Math.random()*4);
 		if (random == 0 && i-1 >=0 && this.unvisitedCell[i-1][j]!=null)
 			this.choosenCell = this.labyrinth.getCell(i-1, j);
@@ -38,9 +36,7 @@ public class MazeGenerator
 		return random;
 	}
 
-
-	public boolean hasAnUnvisitedNeighbor(int i , int j)
-	{
+	public boolean hasAnUnvisitedNeighbor(int i , int j) {
 		boolean result = false;
 		if (i-1 >= 0 && this.unvisitedCell[i-1][j]!=null)
 			result =  result||(this.unvisitedCell[i-1][j]!=null);
@@ -53,8 +49,7 @@ public class MazeGenerator
 		return result;
 	}
 
-	public boolean stillUnvisitedCell()
-	{
+	public boolean stillUnvisitedCell() {
 		for (int i=0 ; i<labyrinth.getLines();i++ )
 		{
 			for (int j = 0 ; j<labyrinth.getRows();j++)
@@ -67,7 +62,6 @@ public class MazeGenerator
 		}
 		return false;
 	}
-
 
 	public void mazeGenrator() {
 		//Make the initial cell the current cell and mark it as visited
@@ -130,14 +124,12 @@ public class MazeGenerator
 			}
 			//else break;
 			stillUnvisitedCell = this.stillUnvisitedCell();
-
 		}
 		setExit();
 		labyrinth.autoset();
 	}
 
-	public void setExit()
-	{
+	public void setExit() {
 		if (!labyrinth.isHaveExit()){
 			int i,j;
 			do

@@ -91,7 +91,7 @@ public class World extends BasicGameState {
 		player = new GridlockedPlayer(this,0,0);
 		mazeGenerator = new MazeGenerator(labyrinth);
 		mazeGenerator.mazeGenrator();
-}
+	}
 
 	public void pause(GameContainer container, StateBasedGame game) {
 		/* Méthode exécutée lors de la mise en pause du jeu */
@@ -113,7 +113,7 @@ public class World extends BasicGameState {
 		return this.state;
 	}
 
-	public Labyrinth getLabyrinth(){
+	public Labyrinth getLabyrinth() {
 		return labyrinth;
 	}
 
@@ -127,7 +127,7 @@ public class World extends BasicGameState {
 		player.keyReleased(key, c);
 	}
 
-	public GridlockedPlayer getPlayer(){
+	public GridlockedPlayer getPlayer() {
 		return player;
 	}
 
@@ -138,6 +138,5 @@ public class World extends BasicGameState {
 	public void setScore(int score) {
 		this.score = score;
 	}
-
 
 }
