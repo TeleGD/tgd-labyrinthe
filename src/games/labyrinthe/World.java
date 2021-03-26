@@ -1,7 +1,5 @@
 package games.labyrinthe;
 
-import java.io.File;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -15,11 +13,9 @@ import games.labyrinthe.characters.GridlockedPlayer;
 
 public class World extends BasicGameState {
 
-	public final static String GAME_NAME="Labyrinthe";
-	public final static String GAME_FOLDER_NAME="labyrinthe";
-	public final static String DIRECTORY_SOUNDS="/sounds"+File.separator+GAME_FOLDER_NAME+File.separator;
-	public final static String DIRECTORY_MUSICS="/musics"+File.separator+GAME_FOLDER_NAME+File.separator;
-	public final static String DIRECTORY_IMAGES="/images"+File.separator+GAME_FOLDER_NAME+File.separator;
+	public final static String DIRECTORY_SOUNDS="/sounds/labyrinthe/";
+	public final static String DIRECTORY_MUSICS="/musics/labyrinthe/";
+	public final static String DIRECTORY_IMAGES="/images/labyrinthe/";
 
 	private Labyrinth labyrinth;
 	private MazeGenerator mazeGenerator;
